@@ -1,0 +1,80 @@
+package edu.cscc;
+import java.util.Random;
+/**
+ * @author khem dahal
+ * Rock Paper Scissors
+ * 10/22/2020
+ **/
+public class RPSLSpock {
+
+    static Random rand = new Random(System.currentTimeMillis());
+
+    public static final String ROCK = "rock";
+    public static final String PAPER = "paper";
+    public static final String SCISSORS = "scissors";
+    public static final String LIZARD = "lizard";
+    public static final String SPOCK = "spock";
+
+    // TODO remove this comment and document this method
+
+    /**
+     *
+     * @param pick random number and check isValidPick or not.
+     * @return The input entered at the keyboard as an valid.
+     */
+    public static boolean isValidPick(String pick) {
+        if (pick == null) {
+            return false;
+        }
+        pick = pick.trim();
+        return (ROCK.equalsIgnoreCase(pick) ||
+                PAPER.equalsIgnoreCase(pick) ||
+                SCISSORS.equalsIgnoreCase(pick) ||
+                LIZARD.equalsIgnoreCase(pick) ||
+                SPOCK.equalsIgnoreCase(pick));
+    }
+
+
+    public static String generatePick() {
+        String pick = null;
+        switch (rand.nextInt(5)) {
+            case 0:
+                pick = ROCK;
+                break;
+            case 1:
+                pick = PAPER;
+                break;
+            case 2:
+                pick = SCISSORS;
+                break;
+            case 3:
+                pick = LIZARD;
+                break;
+            case 4:
+                pick = SPOCK;
+                break;
+        }
+        return pick;
+    }
+
+    // TODO remove this comment and document this method
+
+    /**
+     *
+     * @param c_pick The computer's choice
+     * @param h_pick The player's choice
+     * @return if the player chooses rock and the computer chooses scissors then rock wins
+     * if the player chooses scissors and the computer chooses paper than scissors wins
+     * if the player chooses paper and the computer chooses rock then paper wins
+     * if both players choose the same then the game should run again
+     */
+
+    public static boolean isComputerWin(String c_pick,String h_pick) {
+        h_pick = h_pick.toLowerCase();
+        return ((ROCK.equals(c_pick) && (SCISSORS.equals(h_pick) || LIZARD.equals(h_pick))) ||
+                (PAPER.equals(c_pick) && (ROCK.equals(h_pick) || SPOCK.equals(h_pick))) ||
+                (SCISSORS.equals(c_pick) && (PAPER.equals(h_pick) || LIZARD.equals(h_pick))) ||
+                (LIZARD.equals(c_pick) && (PAPER.equals(h_pick) || SPOCK.equals(h_pick))) ||
+                (SPOCK.equals(c_pick) && (ROCK.equals(h_pick) || SCISSORS.equals(h_pick))));
+    }
+}
